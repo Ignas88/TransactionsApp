@@ -52,14 +52,14 @@ const TransactionTable = ({transactions}) => {
                     <PersonTwoTone className={classes.svg}/> :
                     <BusinessCenterTwoTone className={classes.svg}/>
                   }
-                  {`USER_${row['user_id']}`}
+                  USER_{row['user_id']}
                 </span>
               </TableCell>
               <TableCell align="left">
-                {`${row['type'] === 'cash_in' ? '+' : '-'} ${row['operation'].amount.toString()} ${row['operation'].currency}`}
+                {row['type'] === 'cash_in' ? '+' : '-'} {row['operation'].amount.toString()} {row['operation'].currency}
               </TableCell>
               <TableCell align="left">
-                {`${row['fee']} ${row['operation'].currency}`}
+                {row['fee']} {row['operation'].currency}
               </TableCell>
             </TableRow>
           ))}
