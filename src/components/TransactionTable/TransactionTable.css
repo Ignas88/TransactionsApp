@@ -1,0 +1,17 @@
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+}
+
+.table {
+    width: 100%;
+}
+
+.icon {
+    display: flex;
+    align-items: flex-end;
+}
+
+.svg {
+    margin-right: 5px;
+}

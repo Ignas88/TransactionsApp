@@ -1,5 +1,4 @@
 import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -9,57 +8,39 @@ import TableRow from '@material-ui/core/TableRow';
 import TableFooter from '@material-ui/core/TableFooter';
 import Paper from '@material-ui/core/Paper';
 import {PersonTwoTone, BusinessCenterTwoTone} from '@material-ui/icons';
-
-const useStyles = makeStyles({
-  table: {
-    width: '100%'
-  },
-  container: {
-    maxWidth: 900,
-    margin: '40px auto'
-  },
-  icon: {
-    display: 'flex',
-    alignItems: 'flex-end'
-  },
-  svg: {
-    marginRight: 5
-  },
-  footer: {}
-});
+import './TransactionTable.css';
 
 const TransactionTable = ({transactions}) => {
-  const classes = useStyles();
 
   return (
-    <TableContainer className={classes.container} component={Paper}>
-      <Table className={classes.table} size="small" aria-label="a dense table">
+    <TableContainer className="container" component={Paper}>
+      <Table className="table" size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
-            <TableCell align="left">Date</TableCell>
-            <TableCell align="left">UserName</TableCell>
-            <TableCell align="left">Operation</TableCell>
-            <TableCell align="left">Operator's fee</TableCell>
+            <TableCell>Date</TableCell>
+            <TableCell>UserName</TableCell>
+            <TableCell>Operation</TableCell>
+            <TableCell>Operator's fee</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {transactions && transactions.map((row, idx) => (
+          {transactions && transactions.map(({date, user_type: userType, user_id: userId, type, operation, fee}, idx) => (
             <TableRow key={idx}>
-              <TableCell align="left">{row['date']}</TableCell>
-              <TableCell align="left">
-                <span className={classes.icon}>
-                  {row['user_type'] === 'natural' ?
-                    <PersonTwoTone className={classes.svg}/> :
-                    <BusinessCenterTwoTone className={classes.svg}/>
+              <TableCell>{date}</TableCell>
+              <TableCell>
+                <span className="icon">
+                  {userType === 'natural' ?
+                    <PersonTwoTone className="svg"/> :
+                    <BusinessCenterTwoTone className="svg"/>
                   }
-                  USER_{row['user_id']}
+                  USER_{userId}
                 </span>
               </TableCell>
-              <TableCell align="left">
-                {row['type'] === 'cash_in' ? '+' : '-'} {row['operation'].amount.toString()} {row['operation'].currency}
+              <TableCell>
+                {type === 'cash_in' ? '+' : '-'} {operation.amount.toString()} {operation.currency}
               </TableCell>
-              <TableCell align="left">
-                {row['fee']} {row['operation'].currency}
+              <TableCell>
+                {fee} {operation.currency}
               </TableCell>
             </TableRow>
           ))}

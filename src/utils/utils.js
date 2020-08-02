@@ -1,3 +1,3 @@
-export const countPercentFromAmount = (percents, amount) => (percents / 100) * amount;
+export const countPercents = (percents, amount) => (percents / 100) * amount;
 
-export const roundToTwo = num => (Math.ceil(num.toFixed(3) * 100) / 100).toFixed(2);
+export const formatFee = num => (Math.ceil(num.toFixed(3) * 100) / 100).toFixed(2);
